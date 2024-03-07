@@ -14,7 +14,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/golang/protobuf/ptypes/empty"
+	"google.golang.org/protobuf/types/known/emptypb"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -43,7 +43,7 @@ var _ = Describe("Status Handler", func() {
 		a := testing.GetDefaultTestApp()
 
 		testing.SetupGRPC(a, func(cli api.PodiumClient) {
-			resp, err := cli.Status(context.Background(), &empty.Empty{})
+			resp, err := cli.Status(context.Background(), &emptypb.Empty{})
 			Expect(err).NotTo(HaveOccurred())
 			Expect(resp).NotTo(BeNil())
 			Expect(resp.ErrorRate).To(BeEquivalentTo(0.0))
